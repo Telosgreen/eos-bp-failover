@@ -30,7 +30,7 @@ function notify()
 {
     MESSAGE=$1
     echo $MESSAGE
-      [[ ! -z $VICTOROPS_WEBHOOK ]] && curl -X POST -d '{"entity_id":"keepalived","message_type":"critical","state_message":"$MESSAGE"}' $VICTOROPS_WEBHOOK > /dev/null
+      [[ ! -z $VICTOROPS_WEBHOOK ]] && curl -X POST -d '{"entity_id":"$NAME","message_type":"critical","state_message":"$MESSAGE"}' $VICTOROPS_WEBHOOK > /dev/null
 }
 
 
