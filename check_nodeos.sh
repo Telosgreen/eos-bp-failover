@@ -30,7 +30,7 @@ function notify()
 {
     MESSAGE=$1
     echo $MESSAGE
-    [[ ! -z $VICTOROPS_WEBHOOK ]] && curl -s -X POST --data-urlencode "payload={\"message_type\": \"critical\", \"username\": \"keepalived\", \"text\": \"$MESSAGE\", \"icon_emoji\": \":ghost:\"}" $SLACK_WEBHOOK > /dev/null
+      [[ ! -z $VICTOROPS_WEBHOOK ]] && curl -s -X POST --data-urlencode "payload={\"message_type\": \"critical\", \"entity_id"\": \"keepalived\", \"entity_display_name\": \"$MESSAGE\"}" $VICTOROPS_WEBHOOK > /dev/null
 }
 
 
