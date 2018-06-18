@@ -17,7 +17,7 @@
 # Change these vars based on your node configuration
 NODEOS_HTTP=localhost
 NODEOS_PORT=8888
-SLACK_WEBHOOK=https://hooks.slack.com/services/replace_me
+VICTOROPS_WEBHOOK=https://alert.victorops.com/integrations/generic/20131114/alert/d5b810d1-0de0-4b36-aeca-8ac3c1503235/EOS42
 
 # These are sent via keepalived
 TYPE=$1
@@ -30,8 +30,9 @@ function notify()
 {
     MESSAGE=$1
     echo $MESSAGE
-    [[ ! -z $SLACK_WEBHOOK ]] && curl -s -X POST --data-urlencode "payload={\"channel\": \"#ops\", \"username\": \"keepalived\", \"text\": \"$MESSAGE\", \"icon_emoji\": \":ghost:\"}" $SLACK_WEBHOOK > /dev/null
+    [[ ! -z $VICTOROPS_WEBHOOK ]] && curl -s -X POST --data-urlencode "payload={\"message_type\": \"critical\", \"username\": \"keepalived\", \"text\": \"$MESSAGE\", \"icon_emoji\": \":ghost:\"}" $SLACK_WEBHOOK > /dev/null
 }
+
 
 # Based on the state, perform the relevant action
 case $STATE in
